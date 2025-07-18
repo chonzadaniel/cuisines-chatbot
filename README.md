@@ -91,15 +91,18 @@ action_endpoint: "your_url_here/webhook"
 5. Start the core server in another terminal window:
 
 ```
-python -m rasa_core.run -d models/current/dialogue -u models/current/nlu --port 5002 --connector slack --credentials slack_credentials.yml --endpoints endpoints.yml
+rasa run --model models/20250717-140820-extended-weight.tar.gz \
+  --credentials credentials.yml \
+  --endpoints endpoints.yml \
+  --port 5005
 ```
 
-This will start the server at port 5002.
+This will start the server at port 5005.
 
 6. Now you have to expose this port to the world by using ngrok, open another terminal and type:
 
 ```
-ngrok http 5002
+ngrok http 5005
 ```
 
 7. Take the above url and paste it into the **Events Subscription** page of your slack app in the following format:
