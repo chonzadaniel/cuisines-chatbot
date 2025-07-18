@@ -1,0 +1,98 @@
+version: "3.1"
+
+stories:
+- story: food path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+      - location: delhi
+      - cuisine: pasta
+  - slot_was_set:
+    - location: delhi
+    - cuisine: pasta
+  - action: action_restaurant_search
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_gratitude
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: food path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+      - location: lucknow
+      - cuisine: burger
+  - slot_was_set:
+    - location: lucknow
+    - cuisine: burger
+  - action: action_restaurant_search
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_ask_again
+  - intent: restaurant_search
+    entities:
+      - location: chennai
+      - cuisine: mughlai
+  - slot_was_set:
+    - location: chennai
+    - cuisine: mughlai
+  - action: action_restaurant_search
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_gratitude
+
+- story: food path 3
+  steps:
+  - intent: restaurant_search
+    entities:
+      - location: chennai
+      - cuisine: mughlai
+  - slot_was_set:
+    - location: chennai
+    - cuisine: mughlai
+  - action: action_restaurant_search
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_gratitude
+
+- story: greet path
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: goodbye path
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: food path restart
+  steps:
+  - intent: restaurant_search
+    entities:
+      - location: chennai
+      - cuisine: tandori
+  - slot_was_set:
+    - cuisine: tandori
+    - location: chennai
+  - action: action_restaurant_search
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_ask_again
+  - intent: restaurant_search
+    entities:
+      - cuisine: pasta
+      - location: chennai
+  - slot_was_set:
+    - cuisine: pasta
+    - location: chennai
+  - action: action_restaurant_search
+  - action: utter_did_that_help
+  - intent: thanks
+  - action: utter_gratitude
+  - intent: goodbye
+  - action: utter_goodbye
